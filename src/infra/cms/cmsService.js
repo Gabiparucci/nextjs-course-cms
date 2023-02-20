@@ -7,7 +7,7 @@ const globalQuery = `query {
   }
 }`;
 
-export async function cmsService({ query, preview }) {
+export async function cmsService({ query, variables, preview }) {
   const URL_CMS = preview ? URL_PREVIEW : URL;
   try {
     const pageContentResponse = await fetch(URL_CMS, {
@@ -18,6 +18,7 @@ export async function cmsService({ query, preview }) {
       },
       body: JSON.stringify({
         query,
+        variables,
       }),
     }).then(async (resp) => {
       const body = await resp.json();

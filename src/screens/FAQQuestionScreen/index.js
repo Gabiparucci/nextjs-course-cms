@@ -8,8 +8,29 @@ import { isHeading, isCode } from "datocms-structured-text-utils";
 import { pageHOC } from "../../components/wrappers/pageHOC";
 
 export async function getStaticPaths() {
+  const pathsQuery = `
+  query($first: IntType, $skip: IntType) {
+    allContentFaqQuestions(first: $first, skip: $skip) {
+      id
+      title
+    }
+  }
+  `;
+
+  const { data } = await cmsService({
+    query: pathsQuery,
+    variables: {
+      first: 100,
+      skip: 0,
+    },
+  });
+
   return {
-    paths: [{ params: { id: "f138c88d" } }, { params: { id: "h138c88d" } }],
+    paths: data.allContentFaqQuestions.map((item) => {
+      return {
+        params: { id: item.id },
+      };
+    }),
     fallback: false,
   };
 }
@@ -17,18 +38,25 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params, preview }) {
   const { id } = params;
   const contentQuery = `
-      query {
-      contentFaqQuestion {
-        title
-        content {
-          value
-        }
+  query($id: ItemId) {
+    contentFaqQuestion(filter: {
+      id :{
+        eq: $id
+      }
+    }) {
+      id
+      title
+      content {
+        value
       }
     }
+  }
   `;
-
   const { data } = await cmsService({
     query: contentQuery,
+    variables: {
+      id,
+    },
     preview,
   });
 

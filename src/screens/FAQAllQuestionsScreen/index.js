@@ -14,10 +14,10 @@ export async function getStaticProps({ preview }) {
               id
               title
             }
-            ...on CommonMenuRecord {
+            ...on CommomMenuRecord {
               id
             }
-            ...on CommonFooterRecord {
+            ...on CommomFooterRecord {
               id
             }
             ...on PagefaqDisplayquestionSectionRecord {
