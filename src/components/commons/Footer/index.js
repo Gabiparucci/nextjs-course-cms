@@ -1,7 +1,7 @@
 import { getCmsContent } from "../../../infra/cms/CMSProvider";
 import { Box, Link, Text, theme } from "../../../theme/components";
 
-export function Footer() {
+export function Footer(props) {
   const description = getCmsContent("globalContent.globalFooter.description");
   return (
     <Box

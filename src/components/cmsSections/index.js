@@ -1,10 +1,13 @@
 import { Footer } from "../commons/Footer";
 import { Menu } from "../commons/Menu";
+import { pageFaq } from "./PageFAQ";
+import { PageHomeHeroSection } from "./PageHomeHeroSection";
 import { SEOBlock } from "./SeoBlock";
 
 export const cmsSections = {
-  CommonSeoBlockRecord: (props) => <SEOBlock {...props} />,
+  PagefaqDisplayquestionSectionRecord: pageFaq,
+  CommonSeoBlockRecord: SEOBlock,
   CommonMenuRecord: (props) => <Menu {...props} />,
-  PageHomeHerosectionRecord: () => "Bloco do Hero da Home",
+  PageHomeHerosectionRecord: PageHomeHeroSection,
   CommonFooterRecord: (props) => <Footer {...props} />,
 };
